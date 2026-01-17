@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(270deg,#ff758c,#ff7eb3,#fad0c4,#fbc2eb);
+  background-size: 800% 800%;
+  animation: gradientBG 20s ease infinite;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
+
+/* Background animation */
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Glass container */
+.container {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(15px);
+  padding: 50px;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 0 40px rgba(255,0,100,0.4);
+  max-width: 90%;
+  transition: all 1.5s ease;
+}
+
+/* Text styles */
+.text {
+  font-size: 60px;
+  color: white;
+  text-shadow: 0 0 20px #ff3366;
+  opacity: 0;
+  transition: opacity 2s ease;
+}
+
+/* Typing effect */
+.typing::after {
+  content: "|";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Image */
+#girlImage {
+  display: none;
+  max-width: 65%;
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(255,0,80,0.7);
+  opacity: 0;
+  transition: opacity 2s ease, transform 2s ease;
+  transform: scale(0.8);
+}
+
+/* Final message */
+#finalMessage {
+  font-size: 65px;
+  color: #ff3366;
+  text-shadow: 0 0 30px #ff6699, 0 0 60px #ff3366;
+  opacity: 0;
+  transition: opacity 3s ease;
+}
+
+/* Countdown */
+#countdown {
+  font-size: 50px;
+  color: #fff;
+  margin-top: 20px;
+  opacity: 0;
+}
+
+/* Floating hearts */
+.heart {
+  position: absolute;
+  font-size: 30px;
+  animation: floatUp 7s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Sparkles */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  animation: sparkle 2s infinite;
+}
+
+@keyframes sparkle {
+  0% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(0); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div id="message" class="text typing"></div>
+  <img id="girlImage" src="c:\Users\FELIX\Downloads\WhatsApp Image 2026-01-17 at 1.11.35 AM.jpeg" alt="My Love">
+  <div id="countdown"></div>
+  <div id="finalMessage">💖 CLARE, THIS IS FOR YOU 💖<br>I LOVE YOU FOREVER ❤️</div>
+</div>
+
+<!-- Optional romantic music -->
+<audio id="music" autoplay loop>
+  <source src="c:\Users\FELIX\Downloads\Desktop\Music\Cardi B - Enough (Miami) [Official Music Video].mp3" type="audio/mp3">
+</audio>
+
+<script>
+const messageText = "I LOVE YOU ❤️";
+const message = document.getElementById("message");
+const girlImage = document.getElementById("girlImage");
+const finalMessage = document.getElementById("finalMessage");
+const countdown = document.getElementById("countdown");
+
+let index = 0;
+
+/* Typing effect */
+function typeMessage() {
+  if (index < messageText.length) {
+    message.textContent += messageText.charAt(index);
+    message.style.opacity = 1;
+    index++;
+    setTimeout(typeMessage, 150);
+  }
+}
+typeMessage();
+
+/* Show image */
+setTimeout(() => {
+  message.style.opacity = 0;
+  girlImage.style.display = "block";
+  setTimeout(() => {
+    girlImage.style.opacity = 1;
+    girlImage.style.transform = "scale(1)";
+  }, 500);
+}, 5000);
+
+/* Countdown */
+let time = 5;
+setTimeout(() => {
+  countdown.style.opacity = 1;
+  const timer = setInterval(() => {
+    countdown.textContent = `💗 ${time} 💗`;
+    time--;
+    if (time < 0) {
+      clearInterval(timer);
+      countdown.style.opacity = 0;
+    }
+  }, 1000);
+}, 8000);
+
+/* Final message */
+setTimeout(() => {
+  girlImage.style.opacity = 0;
+  setTimeout(() => {
+    girlImage.style.display = "none";
+    finalMessage.style.opacity = 1;
+  }, 2000);
+}, 14000);
+
+/* Hearts generator */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 20 + "px";
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}
+setInterval(createHeart, 500);
+
+/* Sparkles */
+function createSparkle() {
+  const sparkle = document.createElement("div");
+  sparkle.className = "sparkle";
+  sparkle.style.left = Math.random() * 100 + "vw";
+  sparkle.style.top = Math.random() * 100 + "vh";
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(), 2000);
+}
+setInterval(createSparkle, 300);
+</script>
+
+</body>
+</html>
